@@ -244,7 +244,7 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 			} else if (PLAY.equals(action) || LOOP.equals(action)) {
 
 				AudioManager am = (AudioManager)cordova.getActivity().getSystemService(Context.AUDIO_SERVICE);
-				am.setMode(audioManager.MODE_RINGTONE);
+				am.setMode(am.MODE_RINGTONE);
 
 				cordova.getThreadPool().execute(new Runnable() {
 		            public void run() {
