@@ -205,7 +205,7 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 
 	        int result = am.requestAudioFocus(this,
 	                // Use the music stream.
-	                AudioManager.MODE_RINGTONE,
+	                AudioManager.STREAM_RING,
 	                // Request permanent focus.
 	                AudioManager.AUDIOFOCUS_GAIN);
 
