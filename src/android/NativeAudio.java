@@ -205,7 +205,7 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 
 	        int result = am.requestAudioFocus(this,
 	                // Use the music stream.
-	                AudioManager.STREAM_MUSIC,
+	                AudioManager.MODE_RINGTONE,
 	                // Request permanent focus.
 	                AudioManager.AUDIOFOCUS_GAIN);
 
@@ -242,6 +242,10 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 		        });				
 
 			} else if (PLAY.equals(action) || LOOP.equals(action)) {
+
+				AudioManager am = (AudioManager)cordova.getActivity().getSystemService(Context.AUDIO_SERVICE);
+				am.setMode(audioManager.MODE_RINGTONE);
+
 				cordova.getThreadPool().execute(new Runnable() {
 		            public void run() {
 		            	callbackContext.sendPluginResult( executePlayOrLoop(action, data) );
