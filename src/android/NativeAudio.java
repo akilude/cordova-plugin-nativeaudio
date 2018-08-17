@@ -203,7 +203,7 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 	protected void pluginInitialize() {
 		AudioManager am = (AudioManager)cordova.getActivity().getSystemService(Context.AUDIO_SERVICE);
 		try{
-			am.requestAudioFocus(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);	
+			am.requestAudioFocus(this, AudioManager.STREAM_RING, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);	
 		}catch(Exception e){
 		}
 	    
