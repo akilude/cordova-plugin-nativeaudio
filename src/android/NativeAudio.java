@@ -202,11 +202,13 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 	@Override
 	protected void pluginInitialize() {
 		AudioManager am = (AudioManager)cordova.getActivity().getSystemService(Context.AUDIO_SERVICE);
-		try{
-			am.requestAudioFocus(this, AudioManager.STREAM_RING, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);	
-		}catch(Exception e){
-		}
-	    
+
+	        int result = am.requestAudioFocus(this,
+	                // Use the music stream.
+	                AudioManager.STREAM_MUSIC,
+	                // Request permanent focus.
+	                AudioManager.AUDIOFOCUS_GAIN);
+
 		// Allow android to receive the volume events
 		this.webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_VOLUME_DOWN, false);
 		this.webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_VOLUME_UP, false);
@@ -240,7 +242,6 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 		        });				
 
 			} else if (PLAY.equals(action) || LOOP.equals(action)) {
-
 				cordova.getThreadPool().execute(new Runnable() {
 		            public void run() {
 		            	callbackContext.sendPluginResult( executePlayOrLoop(action, data) );
@@ -300,19 +301,15 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
         }
 	}
 
-    public void onAudioFocusChange(int focusChange){
+    public void onAudioFocusChange(int focusChange) {
         if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
             // Pause playback
-            Log.w("LIVEWIRE AUDIO", "AUDIOFOCUS_LOSS_TRANSIENT");
         } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
             // Resume playback
-            Log.w("LIVEWIRE AUDIO", "AUDIOFOCUS_GAIN");
         } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
             // Stop playback
-            Log.w("LIVEWIRE AUDIO", "AUDIOFOCUS_LOSS");
         }
     }
-    
 
     @Override
     public void onPause(boolean multitasking) {
