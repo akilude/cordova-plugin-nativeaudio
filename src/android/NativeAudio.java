@@ -209,6 +209,12 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 	                // Request permanent focus.
 	                AudioManager.AUDIOFOCUS_GAIN);
 
+	        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+	        	Log.w( "LIVEWIRE", "AUDIOFOCUS" );
+	        } else if (result == AudioManager.AUDIOFOCUS_REQUEST_FAILED) {
+	        	Log.w( "LIVEWIRE", "FAILED AUDIOFOCUS" );
+	        }
+
 		// Allow android to receive the volume events
 		this.webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_VOLUME_DOWN, false);
 		this.webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_VOLUME_UP, false);
@@ -304,10 +310,13 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
     public void onAudioFocusChange(int focusChange) {
         if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
             // Pause playback
+            Log.w( "LIVEWIRE", "PAUSE" );
         } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
             // Resume playback
+            Log.w( "LIVEWIRE", "Resume" );
         } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
             // Stop playback
+            Log.w( "LIVEWIRE", "STOP" );
         }
     }
 
