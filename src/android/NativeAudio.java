@@ -310,13 +310,13 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
     public void onAudioFocusChange(int focusChange) {
         if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
             // Pause playback
-            Log.w( "LIVEWIRE", "PAUSE" );
+            Log.w( "LIVEWIRE", "PAUSE AudioFocus" );
         } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
             // Resume playback
-            Log.w( "LIVEWIRE", "Resume" );
+            Log.w( "LIVEWIRE", "Resume AudioFocus" );
         } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
             // Stop playback
-            Log.w( "LIVEWIRE", "STOP" );
+            Log.w( "LIVEWIRE", "STOP AudioFocus" );
         }
     }
 
