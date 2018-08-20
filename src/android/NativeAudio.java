@@ -46,6 +46,7 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 	public static final String UNLOAD="unload";
     public static final String ADD_COMPLETE_LISTENER="addCompleteListener";
 	public static final String SET_VOLUME_FOR_COMPLEX_ASSET="setVolumeForComplexAsset";
+	public Boolean is_ringing = false;
 
 	private static final String LOGTAG = "NativeAudio";
 	
@@ -111,8 +112,10 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 
 			if (assetMap.containsKey(audioID)) {
 				NativeAudioAsset asset = assetMap.get(audioID);
-				if (LOOP.equals(action))
+				if (LOOP.equals(action)){
 					asset.loop();
+					is_ringing = true;
+				}
 				else
 					asset.play(new Callable<Void>() {
                         public Void call() throws Exception {
@@ -141,6 +144,7 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 
 	private PluginResult executeStop(JSONArray data) {
 		String audioID;
+		is_ringing = false;
 		try {
 			audioID = data.getString(0);
 			//Log.d( LOGTAG, "stop - " + audioID );
@@ -281,9 +285,9 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 	    } else if (SET_VOLUME_FOR_COMPLEX_ASSET.equals(action)) {
 				cordova.getThreadPool().execute(new Runnable() {
 			public void run() {
-	                        callbackContext.sendPluginResult( executeSetVolumeForComplexAsset(data) );
-                    }
-                 });
+	            callbackContext.sendPluginResult( executeSetVolumeForComplexAsset(data) );
+            	}
+       		});
 	    }
             else {
                 result = new PluginResult(Status.OK);
