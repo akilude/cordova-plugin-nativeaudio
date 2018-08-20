@@ -332,6 +332,33 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
         } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
             // Stop playback
             Log.w( "LIVEWIRE", "STOP AudioFocus" );
+            AudioManager am = (AudioManager)cordova.getActivity().getSystemService(Context.AUDIO_SERVICE);
+            am.abandonAudioFocus(this);
+
+            new android.os.Handler().postDelayed(
+            	new Runnable() {
+            		public void run() {
+            			int result = am.requestAudioFocus(this,
+            				// Use the music stream.
+	                		AudioManager.STREAM_MUSIC,
+	                		// Request permanent focus.
+	                		AudioManager.AUDIOFOCUS_GAIN);
+
+				        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+				        	Log.w( "LIVEWIRE", "AUDIOFOCUS Timeout" );
+				        	while (!resumeList.isEmpty()) {
+				        		NativeAudioAsset asset = resumeList.remove(0);
+				        		asset.resume();
+				        	}
+				        } else if (result == AudioManager.AUDIOFOCUS_REQUEST_FAILED) {
+				        	Log.w( "LIVEWIRE", "FAILED AUDIOFOCUS Timeout" );
+				        }
+            		}
+            	}, 
+            500);
+
+            
+
         }
     }
 
