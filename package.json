@@ -11,9 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/akilude/cordova-plugin-nativeaudio.git"
+    "url": "https://github.com/floatinghotpot/cordova-plugin-nativeaudio.git"
   },
   "bugs": {
+    "url": "https://github.com/floatinghotpot/cordova-plugin-nativeaudio/issues"
   },
   "keywords": [
     "cordova",

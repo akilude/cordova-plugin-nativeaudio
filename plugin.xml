@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="com.everycrave.vidphon_messenger"
+    id="cordova-plugin-nativeaudio"
     version="3.0.9">
       
     <name>Cordova Native Audio</name>
@@ -11,8 +11,8 @@
     
 	<license>MIT</license>
 	<keywords>audio,fx,music,mp3,game,rjfun</keywords>
-    <repo>https://github.com/akilude/cordova-plugin-nativeaudio</repo>
-    <issue>https://github.com/akilude/cordova-plugin-nativeaudio/issues</issue>
+    <repo>https://github.com/floatinghotpot/cordova-plugin-nativeaudio.git</repo>
+    <issue>https://github.com/floatinghotpot/cordova-plugin-nativeaudio/issues</issue>
 
 	<engines>
 	    <engine name="cordova" version=">=3.5" />
