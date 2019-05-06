@@ -5,7 +5,7 @@ Cordova / PhoneGap 3.5+ extension for Native Audio
 
 ##Update Package Name
 
-In the plugin.xml file, you need to update the plugin id to that of your own so that android does not consider this plugin as another app which causes the plugin to lose audio focus. Next update the package name in the src/android folder for each file.
+In the plugin.xml file, you need to update the package name in the src/android folder for each file to your app package name.
 
 ## Description
 
