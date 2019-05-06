@@ -1,18 +1,11 @@
 # Cordova Native Audio Plugin
 
-Cordova / PhoneGap 3.5+ extension for Native Audio playback, aimed at HTML5 gaming and audio applications which require minimum latency, polyphony and concurrency.
+Cordova / PhoneGap 3.5+ extension for Native Audio 
 
-## Contents
 
-1. [Description](#description)
-2. [History](#history)
-3. [Roadmap](#roadmap)
-5. [Integration](#integration)
-7. [Supported Platforms](#supported-platforms)
-8. [Installation](#installation)
-9. [Usage](#usage)
-10. [API](#api)
-11. [Demo](#demo)
+##Update Package Name
+
+In the plugin.xml file, you need to update the plugin id to that of your own so that android does not consider this plugin as another app which causes the plugin to lose audio focus. Next update the package name in the src/android folder for each file.
 
 ## Description
 
@@ -24,18 +17,6 @@ Community-driven, clean fork of the Low Latency Audio Plugin for Cordova / Phone
 
 This project cleans up a lot of legacy code, and adds success, error and completion callbacks. It also features integration in AngularJS projects via [ngCordova](http://www.ngcordova.com).
 
-## Roadmap
-
-Following the Cordova philosophy, this is a shim for a web audio implementation (on mobile) which is as fast and feature-rich as native mobile APIs. Currently, neither HTML5 Audio or the more recent Web Audio API offer a cross-platform solution which 1) is fast, 2) supports polyphony, 3) concurrency and 4) maintains a low overhead.
-
-It should be replaced by a standardised W3C solution as soon as such an implementation offers comparable performance across (mobile) devices, which is crucial for HTML5-based games.
-
-## Integration
-
-This plugin is available as an AngularJS service module, facilitating the usage in AngularJS-based Cordova/PhoneGap projects.
-
-It extends the ngCordova project, an effort by the great guys at [Drifty](http://github.com/driftyco), creators of the Ionic Framework.
-Download it at the ngCordova [website](http://www.ngcordova.com) or the [repository](http://www.github.com/driftyco/ng-cordova).
 
 ## Supported Platforms
 
