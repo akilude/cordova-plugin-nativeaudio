@@ -13,6 +13,7 @@ import java.util.concurrent.Callable;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 
@@ -40,18 +41,10 @@ public class NativeAudioAssetComplex implements OnPreparedListener, OnCompletion
         mp.setOnCompletionListener(this);
         mp.setOnPreparedListener(this);
 		mp.setDataSource( afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-		 
-		if (Build.VERSION.SDK_INT >= 21){
-			// android 5 and above
-            AudioAttributes aa = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_UNKNOWN)
-                    .build();
-            mp.setAudioAttributes(aa);
-        } else {
-        	// android 4.4 and below
-            mp.setAudioStreamType(AudioManager.STREAM_RING);
-        }
+		mp.setAudioAttributes(new AudioAttributes.Builder()
+			.setUsage(AudioAttributes.USAGE_VOICE_COMMUNICATION)
+			.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+			.build());
 		mp.setVolume(volume, volume);
 		mp.prepare();
 	}

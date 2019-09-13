@@ -66,7 +66,7 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 	public void onAudioFocusChange(int focusChange) {
         if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
             // Pause playback
-            Log.w( "LIVEWIRE", "PAUSE AudioFocus" );
+            Log.w( "nativeaudio", "PAUSE AudioFocus" );
             for (HashMap.Entry<String, NativeAudioAsset> entry : assetMap.entrySet()) {
             	NativeAudioAsset asset = entry.getValue();
             	boolean wasPlaying = asset.pause();
@@ -76,14 +76,14 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
         	}
         } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
             // Resume playback
-            Log.w( "LIVEWIRE", "Resume AudioFocus" );
+            Log.w( "nativeaudio", "Resume AudioFocus" );
             while (!resumeList.isEmpty()) {
             	NativeAudioAsset asset = resumeList.remove(0);
             	asset.resume();
         	}
         } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
             // Stop playback
-            Log.w( "LIVEWIRE", "STOP AudioFocus" );
+            Log.w( "nativeaudio", "STOP AudioFocus" );
         }
     }
 
@@ -236,16 +236,14 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 		AudioManager am = (AudioManager)cordova.getActivity().getSystemService(Context.AUDIO_SERVICE);
 
 	        int result = am.requestAudioFocus(this,
-	                // Use the music stream.
-	                // AudioManager.STREAM_MUSIC,
 	                AudioManager.STREAM_RING,
 	                // Request permanent focus.
-	                AudioManager.AUDIOFOCUS_GAIN);
+	                AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
 
 	        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-	        	Log.w( "LIVEWIRE", "AUDIOFOCUS" );
+	        	Log.w( "nativeaudio", "AUDIOFOCUS" );
 	        } else if (result == AudioManager.AUDIOFOCUS_REQUEST_FAILED) {
-	        	Log.w( "LIVEWIRE", "FAILED AUDIOFOCUS" );
+	        	Log.w( "nativeaudio", "FAILED AUDIOFOCUS" );
 	        }
 
 		// Allow android to receive the volume events
